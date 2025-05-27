@@ -1,88 +1,171 @@
-# reddit_meme_scraper
+# Reddit Meme Scraper
 
-_Application in development_  
+🎭 **Your Personal Meme Delivery Service**
 
-Below is what I'm working on right now.
+A Python bot that scrapes fresh memes from Reddit and delivers them directly to your Telegram! Perfect for staying updated with the latest memes without getting distracted by social media.
 
-## Features
+## 🚀 Quick Start
 
-- **Configurable Sources:** Easily update the list of meme subreddits and post filters via a `.env` file.
-- **Automatic Scheduling:** Fetches memes multiple times per day, scheduled using APScheduler.
-- **Direct Delivery:** Sends images directly to your Telegram chat.
-- **Duplicate Handling:** Prevents re-sending already seen memes.
-- **Extensible:** Built with future features in mind (e.g., news summaries with OpenAI API).
+### 1. Install Dependencies
+```bash
+pip install -r requirements.txt
+```
 
-## Prerequisites
+### 2. Easy Setup
+```bash
+python setup.py
+```
+This interactive setup will guide you through:
+- Creating Reddit API credentials
+- Setting up a Telegram bot
+- Testing your configuration
 
-- **Python 3.7+**
-- **Libraries:**
-  - `praw
-  - `python-telegram-bot`
-  - `python-dotenv`
-  - `apscheduler`
-- **Reddit API credentials:**  
-  Create a Reddit app to get your `client_id`, `client_secret`, and set a `user_agent`.
-- **Telegram Bot:**  
-  Create a Telegram bot using [BotFather](https://core.telegram.org/bots#6-botfather) to obtain your bot token, and get your chat ID.
+### 3. Run the Scraper
+```bash
+python main.py
+```
 
-## Setup
+## 📋 Manual Setup (If you prefer)
 
-1. **Clone the Repository:**
+### Reddit API Setup
+1. Go to [Reddit Apps](https://www.reddit.com/prefs/apps)
+2. Click "Create App" or "Create Another App"
+3. Choose "script" as app type
+4. Set redirect URI to: `http://localhost:8080`
+5. Note your `client_id` and `client_secret`
 
-   ```bash
-   git clone https://github.com/yourusername/reddit_meme_scraper.git
-   cd reddit_meme_scraper
-   ```
+### Telegram Bot Setup
+1. Message [@BotFather](https://t.me/botfather) on Telegram
+2. Send `/newbot` and follow instructions
+3. Copy the bot token
+4. Message your bot to start a chat
+5. Get your chat ID from [@userinfobot](https://t.me/userinfobot)
 
-2. **Install Dependencies:**
+### Create .env file
+```bash
+# Copy from env_example.txt and fill in your credentials
+cp env_example.txt .env
+```
 
-   ```bash
-   pip install -r requirements.txt
-   ```
+## ⚙️ Configuration
 
-3. **Configure Environment Variables:**
+Edit `config.json` to customize your meme preferences:
 
-   Create a `.env` file in the project root and add your credentials and settings. For example:
+```json
+{
+    "reddit": {
+        "subreddits": ["dankmemes", "memes", "funny", "wholesomememes"],
+        "sort_by": "hot",           // "hot", "new", "top"
+        "limit": 10,                // Number of posts to check per subreddit
+        "min_score": 100            // Minimum upvotes required
+    },
+    "schedule": {
+        "interval_hours": 1         // How often to check for new memes
+    },
+    "filters": {
+        "image_only": true,         // Only send image posts
+        "exclude_nsfw": true,       // Filter out NSFW content
+        "max_title_length": 200     // Maximum title length
+    }
+}
+```
 
-   ```env
-   TELEGRAM_BOT_TOKEN=your_telegram_bot_token_here
-   TELEGRAM_CHAT_ID=your_telegram_chat_id_here
-   
-   REDDIT_CLIENT_ID=your_reddit_client_id_here
-   REDDIT_CLIENT_SECRET=your_reddit_client_secret_here
-   REDDIT_USER_AGENT=your_user_agent_here
-   
-   # Comma-separated list of subreddits to scrape memes from
-   SUBREDDITS=r/memes,r/dankmemes
-   
-   # Sorting method for fetching posts (hot, new, top)
-   SORT_BY=hot
-   
-   # Number of posts to fetch per subreddit
-   FETCH_COUNT=5
-   
-   # Scheduled times (24h format, comma-separated) when the scraper runs
-   SCHEDULE_TIMES=09:00,15:00,21:00
-   ```
+## 🎯 Features
 
-4. **Run the Application:**
+- ✅ **Smart Filtering**: Only high-quality memes based on upvotes and content type
+- ✅ **Duplicate Prevention**: Never sends the same meme twice
+- ✅ **Multiple Subreddits**: Scrapes from your favorite meme communities
+- ✅ **Scheduled Delivery**: Automatic hourly (or custom interval) updates
+- ✅ **Telegram Integration**: Beautiful formatted messages with meme info
+- ✅ **Error Handling**: Robust fallbacks for different image types
+- ✅ **Configurable**: Easy JSON configuration for all settings
+- ✅ **Logging**: Detailed logs for monitoring and debugging
 
-   ```bash
-   python main.py
-   ```
+## 📱 Telegram Message Format
 
-## Logging
+Each meme comes with:
+- 🖼️ **High-quality image**
+- 📝 **Meme title**
+- 📍 **Source subreddit**
+- ⬆️ **Upvote count**
+- 👤 **Original author**
+- 🔗 **Direct Reddit link**
 
-Logs are maintained to provide insights into the scraping and messaging process. Adjust the logging configuration as needed for troubleshooting.
+## 🔧 Advanced Usage
 
-## Future Improvements
+### Run Once (Test Mode)
+```bash
+python -c "
+from main import main
+from dotenv import load_dotenv
+load_dotenv()
+from reddit_scraper import RedditScraper
+from telegram_sender import TelegramSender
+from utils import load_config
 
-- Extend functionality to fetch other content types (e.g., tech news).
+config = load_config()
+scraper = RedditScraper(config)
+sender = TelegramSender(config)
+memes = scraper.scrape_memes()
+sender.send_memes(memes)
+"
+```
 
-## Disclaimer
+### Custom Subreddits
+Add any image-based subreddits to the config:
+```json
+"subreddits": ["dankmemes", "memes", "ProgrammerHumor", "wholesomememes", "funny"]
+```
 
-Use this tool responsibly and adhere to Reddit and Telegram usage guidelines.
+### Scheduling Options
+- **Hourly**: `"interval_hours": 1`
+- **Every 30 minutes**: `"interval_hours": 0.5`
+- **Daily**: `"interval_hours": 24`
 
-## License
+## 📁 Project Structure
 
-MIT License
+```
+reddit_meme_scraper/
+├── main.py              # Main application entry point
+├── reddit_scraper.py    # Reddit API integration
+├── telegram_sender.py   # Telegram bot functionality
+├── utils.py            # Helper functions
+├── setup.py            # Interactive setup script
+├── config.json         # Configuration settings
+├── requirements.txt    # Python dependencies
+├── .env               # Your API credentials (created by setup)
+└── sent_posts.json    # Tracks sent memes (auto-created)
+```
+
+## 🐛 Troubleshooting
+
+### Common Issues
+
+**"Reddit API test failed"**
+- Check your Reddit credentials in `.env`
+- Ensure you selected "script" type when creating the Reddit app
+
+**"Telegram bot test failed"**
+- Verify your bot token is correct
+- Make sure you've messaged your bot at least once
+- Double-check your chat ID
+
+**"No memes found"**
+- Lower the `min_score` in config.json
+- Check if the subreddits are image-based
+- Try changing `sort_by` to "new" or "top"
+
+## 🎓 Perfect for Learning
+
+This project demonstrates:
+- **API Integration** (Reddit + Telegram)
+- **Web Scraping** with PRAW
+- **Async Programming** for Telegram
+- **Configuration Management**
+- **Error Handling & Logging**
+- **Task Scheduling**
+- **Data Persistence**
+
+## 📜 License
+
+MIT License - feel free to modify and share!

@@ -1,0 +1,19 @@
+{
+    "reddit": {
+        "subreddits": ["dankmemes", "memes", "funny", "wholesomememes"],
+        "sort_by": "hot",
+        "limit": 10,
+        "min_score": 100
+    },
+    "schedule": {
+        "interval_hours": 1
+    },
+    "filters": {
+        "image_only": true,
+        "exclude_nsfw": true,
+        "max_title_length": 200
+    },
+    "telegram": {
+        "enabled": true
+    }
+} 
