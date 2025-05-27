@@ -1,6 +1,6 @@
 {
     "reddit": {
-        "subreddits": ["dankmemes", "memes", "funny", "wholesomememes"],
+        "subreddits": ["dankmemes", "memes", "funny", "wholesomememes", "blursedimages", "couplememes", "aww", "cats"],
         "sort_by": "hot",
         "limit": 10,
         "min_score": 100
@@ -10,7 +10,7 @@
     },
     "filters": {
         "image_only": true,
-        "exclude_nsfw": true,
+        "exclude_nsfw": false,
         "max_title_length": 200
     },
     "telegram": {
