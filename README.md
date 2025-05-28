@@ -2,170 +2,237 @@
 
 🎭 **Your Personal Meme Delivery Service**
 
-A Python bot that scrapes fresh memes from Reddit and delivers them directly to your Telegram! Perfect for staying updated with the latest memes without getting distracted by social media.
+A Python application that scrapes memes from Reddit and sends them via Telegram. This tool automatically collects memes from specified subreddits and forwards them to your Telegram channel or chat.
 
-## 🚀 Quick Start
+## Features
 
-### 1. Install Dependencies
-```bash
-pip install -r requirements.txt
-```
+- Scrapes memes from multiple subreddits
+- Sends memes via Telegram bot
+- Configurable scheduling
+- Automatic duplicate detection
+- Logging system for monitoring
+- Cross-platform support (Windows, Linux)
 
-### 2. Easy Setup
-```bash
-python setup.py
-```
-This interactive setup will guide you through:
-- Creating Reddit API credentials
-- Setting up a Telegram bot
-- Testing your configuration
+## Prerequisites
 
-### 3. Run the Scraper
-```bash
-python main.py
-```
+- Python 3.8 or higher
+- pip (Python package manager)
+- Reddit API credentials
+- Telegram Bot Token
 
-## 📋 Manual Setup (If you prefer)
+## Installation
 
-### Reddit API Setup
-1. Go to [Reddit Apps](https://www.reddit.com/prefs/apps)
-2. Click "Create App" or "Create Another App"
-3. Choose "script" as app type
-4. Set redirect URI to: `http://localhost:8080`
-5. Note your `client_id` and `client_secret`
+### Windows
 
-### Telegram Bot Setup
-1. Message [@BotFather](https://t.me/botfather) on Telegram
-2. Send `/newbot` and follow instructions
-3. Copy the bot token
-4. Message your bot to start a chat
-5. Get your chat ID from [@userinfobot](https://t.me/userinfobot)
+1. **Install Python**
+   - Download Python from [python.org](https://www.python.org/downloads/)
+   - During installation, make sure to check "Add Python to PATH"
 
-### Create .env file
-```bash
-# Copy from env_example.txt and fill in your credentials
-cp env_example.txt .env
-```
+2. **Clone the Repository**
+   ```bash
+   git clone https://github.com/yourusername/reddit_meme_scraper.git
+   cd reddit_meme_scraper
+   ```
 
-## ⚙️ Configuration
+3. **Create Virtual Environment**
+   ```bash
+   python -m venv venv
+   .\venv\Scripts\activate
+   ```
 
-Edit `config.json` to customize your meme preferences:
+4. **Install Dependencies**
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-```json
-{
-    "reddit": {
-        "subreddits": ["dankmemes", "memes", "funny", "wholesomememes"],
-        "sort_by": "hot",           // "hot", "new", "top"
-        "limit": 10,                // Number of posts to check per subreddit
-        "min_score": 100            // Minimum upvotes required
-    },
-    "schedule": {
-        "interval_hours": 1         // How often to check for new memes
-    },
-    "filters": {
-        "image_only": true,         // Only send image posts
-        "exclude_nsfw": true,       // Filter out NSFW content
-        "max_title_length": 200     // Maximum title length
-    }
-}
-```
+5. **Configure Environment**
+   - Create a `.env` file in the project root
+   - Add your credentials:
+   ```
+   REDDIT_CLIENT_ID=your_client_id
+   REDDIT_CLIENT_SECRET=your_client_secret
+   REDDIT_USER_AGENT=your_user_agent
+   TELEGRAM_BOT_TOKEN=your_bot_token
+   TELEGRAM_CHAT_ID=your_chat_id
+   ```
 
-## 🎯 Features
+### Fedora
 
-- ✅ **Smart Filtering**: Only high-quality memes based on upvotes and content type
-- ✅ **Duplicate Prevention**: Never sends the same meme twice
-- ✅ **Multiple Subreddits**: Scrapes from your favorite meme communities
-- ✅ **Scheduled Delivery**: Automatic hourly (or custom interval) updates
-- ✅ **Telegram Integration**: Beautiful formatted messages with meme info
-- ✅ **Error Handling**: Robust fallbacks for different image types
-- ✅ **Configurable**: Easy JSON configuration for all settings
-- ✅ **Logging**: Detailed logs for monitoring and debugging
+1. **Install Python and Git**
+   ```bash
+   sudo dnf update
+   sudo dnf install python3 python3-pip python3-venv git
+   ```
 
-## 📱 Telegram Message Format
+2. **Clone the Repository**
+   ```bash
+   git clone https://github.com/yourusername/reddit_meme_scraper.git
+   cd reddit_meme_scraper
+   ```
 
-Each meme comes with:
-- 🖼️ **High-quality image**
-- 📝 **Meme title**
-- 📍 **Source subreddit**
-- ⬆️ **Upvote count**
-- 👤 **Original author**
-- 🔗 **Direct Reddit link**
+3. **Create Virtual Environment**
+   ```bash
+   python3 -m venv venv
+   source venv/bin/activate
+   ```
 
-## 🔧 Advanced Usage
+4. **Install Dependencies**
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-### Run Once (Test Mode)
-```bash
-python -c "
-from main import main
-from dotenv import load_dotenv
-load_dotenv()
-from reddit_scraper import RedditScraper
-from telegram_sender import TelegramSender
-from utils import load_config
+5. **Configure Environment**
+   - Create a `.env` file in the project root
+   - Add your credentials (same as Windows section)
 
-config = load_config()
-scraper = RedditScraper(config)
-sender = TelegramSender(config)
-memes = scraper.scrape_memes()
-sender.send_memes(memes)
-"
-```
+### Ubuntu
 
-### Custom Subreddits
-Add any image-based subreddits to the config:
-```json
-"subreddits": ["dankmemes", "memes", "ProgrammerHumor", "wholesomememes", "funny"]
-```
+1. **Install Python and Git**
+   ```bash
+   sudo apt update
+   sudo apt install python3 python3-pip python3-venv git
+   ```
 
-### Scheduling Options
-- **Hourly**: `"interval_hours": 1`
-- **Every 30 minutes**: `"interval_hours": 0.5`
-- **Daily**: `"interval_hours": 24`
+2. **Clone the Repository**
+   ```bash
+   git clone https://github.com/yourusername/reddit_meme_scraper.git
+   cd reddit_meme_scraper
+   ```
 
-## 📁 Project Structure
+3. **Create Virtual Environment**
+   ```bash
+   python3 -m venv venv
+   source venv/bin/activate
+   ```
 
-```
-reddit_meme_scraper/
-├── main.py              # Main application entry point
-├── reddit_scraper.py    # Reddit API integration
-├── telegram_sender.py   # Telegram bot functionality
-├── utils.py            # Helper functions
-├── setup.py            # Interactive setup script
-├── config.json         # Configuration settings
-├── requirements.txt    # Python dependencies
-├── .env               # Your API credentials (created by setup)
-└── sent_posts.json    # Tracks sent memes (auto-created)
-```
+4. **Install Dependencies**
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-## 🐛 Troubleshooting
+5. **Configure Environment**
+   - Create a `.env` file in the project root
+   - Add your credentials (same as Windows section)
 
-### Common Issues
+## Configuration
 
-**"Reddit API test failed"**
-- Check your Reddit credentials in `.env`
-- Ensure you selected "script" type when creating the Reddit app
+1. **Reddit API Setup**
+   - Go to [Reddit Apps](https://www.reddit.com/prefs/apps)
+   - Click "Create App" or "Create Another App"
+   - Fill in the required information
+   - Note down the client ID and client secret
 
-**"Telegram bot test failed"**
-- Verify your bot token is correct
-- Make sure you've messaged your bot at least once
-- Double-check your chat ID
+2. **Telegram Bot Setup**
+   - Message [@BotFather](https://t.me/botfather) on Telegram
+   - Create a new bot using `/newbot`
+   - Note down the bot token
+   - Get your chat ID by messaging [@userinfobot](https://t.me/userinfobot)
 
-**"No memes found"**
-- Lower the `min_score` in config.json
-- Check if the subreddits are image-based
-- Try changing `sort_by` to "new" or "top"
+3. **Configure `config.json`**
+   ```json
+   {
+     "subreddits": ["memes", "dankmemes"],
+     "schedule": {
+       "interval_hours": 1
+     },
+     "telegram": {
+       "max_memes_per_batch": 5
+     }
+   }
+   ```
 
-## 🎓 Perfect for Learning
+## Usage
 
-This project demonstrates:
-- **API Integration** (Reddit + Telegram)
-- **Web Scraping** with PRAW
-- **Async Programming** for Telegram
-- **Configuration Management**
-- **Error Handling & Logging**
-- **Task Scheduling**
-- **Data Persistence**
+### Windows
 
-## 📜 License
+1. **Run the Application**
+   ```bash
+   .\venv\Scripts\python main.py
+   ```
 
-MIT License - feel free to modify and share!
+2. **Run as Windows Service (Optional)**
+   - Install NSSM (Non-Sucking Service Manager)
+   - Create a service:
+   ```bash
+   nssm install RedditMemeScraper "C:\path\to\venv\Scripts\python.exe" "C:\path\to\main.py"
+   nssm start RedditMemeScraper
+   ```
+
+### Fedora/Ubuntu
+
+1. **Run the Application**
+   ```bash
+   source venv/bin/activate
+   python3 main.py
+   ```
+
+2. **Run as Systemd Service (Recommended)**
+   ```bash
+   sudo nano /etc/systemd/system/reddit-meme-scraper.service
+   ```
+   
+   Add the following content:
+   ```ini
+   [Unit]
+   Description=Reddit Meme Scraper Service
+   After=network.target
+
+   [Service]
+   Type=simple
+   User=<your-username>
+   WorkingDirectory=/path/to/reddit_meme_scraper
+   Environment=PATH=/path/to/reddit_meme_scraper/venv/bin
+   ExecStart=/path/to/reddit_meme_scraper/venv/bin/python main.py
+   Restart=always
+   RestartSec=10
+
+   [Install]
+   WantedBy=multi-user.target
+   ```
+
+   Enable and start the service:
+   ```bash
+   sudo systemctl enable reddit-meme-scraper
+   sudo systemctl start reddit-meme-scraper
+   ```
+
+## Monitoring
+
+### Windows
+- Check the logs in the project directory
+- If running as a service, check Event Viewer
+
+### Fedora/Ubuntu
+- View service status:
+  ```bash
+  sudo systemctl status reddit-meme-scraper
+  ```
+- View logs:
+  ```bash
+  journalctl -u reddit-meme-scraper -f
+  ```
+
+## Troubleshooting
+
+1. **Application Not Starting**
+   - Check if Python is installed correctly
+   - Verify all dependencies are installed
+   - Check the `.env` file for correct credentials
+
+2. **No Memes Being Sent**
+   - Verify Reddit API credentials
+   - Check Telegram bot token and chat ID
+   - Ensure the bot is added to the target chat/channel
+
+3. **Service Not Starting**
+   - Check service status and logs
+   - Verify file paths in service configuration
+   - Ensure correct permissions
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
