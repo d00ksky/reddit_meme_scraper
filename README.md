@@ -11,7 +11,8 @@ A Python application that scrapes memes from Reddit and sends them via Telegram.
 - Configurable scheduling
 - Automatic duplicate detection
 - Logging system for monitoring
-- Cross-platform support (Windows, Linux)
+- E-ink display support (Raspberry Pi)
+- Cross-platform support (Windows, Linux, Raspberry Pi)
 
 ## Prerequisites
 
@@ -20,99 +21,88 @@ A Python application that scrapes memes from Reddit and sends them via Telegram.
 - Reddit API credentials
 - Telegram Bot Token
 
-## Installation
+## Quick Installation
+
+### 🚀 Universal Installer (Recommended)
+
+**Linux/Raspberry Pi:**
+```bash
+git clone https://github.com/yourusername/reddit_meme_scraper.git
+cd reddit_meme_scraper
+chmod +x install.sh
+./install.sh
+```
+
+**Windows:**
+```cmd
+git clone https://github.com/yourusername/reddit_meme_scraper.git
+cd reddit_meme_scraper
+install.bat
+```
+
+The installer will:
+- ✅ Detect your platform automatically
+- ✅ Install dependencies (venv for Linux, system-wide for Raspberry Pi)
+- ✅ Set up display support (Raspberry Pi only)
+- ✅ Run interactive setup for API credentials
+
+---
+
+## Manual Installation
 
 ### Windows
 
-1. **Install Python**
-   - Download Python from [python.org](https://www.python.org/downloads/)
-   - During installation, make sure to check "Add Python to PATH"
-
-2. **Clone the Repository**
+1. **Clone and Run Installer**
    ```bash
    git clone https://github.com/yourusername/reddit_meme_scraper.git
    cd reddit_meme_scraper
+   install.bat
    ```
 
-3. **Create Virtual Environment**
-   ```bash
-   python -m venv venv
-   .\venv\Scripts\activate
-   ```
+### Raspberry Pi
 
-4. **Install Dependencies**
-   ```bash
-   pip install -r requirements.txt
-   ```
+**🍓 Raspberry Pi uses system-wide installation (no venv) for simplicity:**
 
-5. **Configure Environment**
-   - Create a `.env` file in the project root
-   - Add your credentials:
-   ```
-   REDDIT_CLIENT_ID=your_client_id
-   REDDIT_CLIENT_SECRET=your_client_secret
-   REDDIT_USER_AGENT=your_user_agent
-   TELEGRAM_BOT_TOKEN=your_bot_token
-   TELEGRAM_CHAT_ID=your_chat_id
-   ```
-
-### Fedora
-
-1. **Install Python and Git**
-   ```bash
-   sudo dnf update
-   sudo dnf install python3 python3-pip python3-venv git
-   ```
-
-2. **Clone the Repository**
+1. **Clone and Install**
    ```bash
    git clone https://github.com/yourusername/reddit_meme_scraper.git
    cd reddit_meme_scraper
+   chmod +x install.sh
+   ./install.sh
    ```
 
-3. **Create Virtual Environment**
+2. **Enable as Service**
    ```bash
-   python3 -m venv venv
-   source venv/bin/activate
+   sudo cp reddit-meme-scraper.service /etc/systemd/system/
+   sudo sed -i "s|/home/pi/|$HOME/|g" /etc/systemd/system/reddit-meme-scraper.service
+   sudo sed -i "s|User=pi|User=$USER|g" /etc/systemd/system/reddit-meme-scraper.service
+   sudo systemctl enable reddit-meme-scraper
+   sudo systemctl start reddit-meme-scraper
    ```
 
-4. **Install Dependencies**
-   ```bash
-   pip install -r requirements.txt
-   ```
+### Ubuntu/Linux
 
-5. **Configure Environment**
-   - Create a `.env` file in the project root
-   - Add your credentials (same as Windows section)
-
-### Ubuntu
-
-1. **Install Python and Git**
-   ```bash
-   sudo apt update
-   sudo apt install python3 python3-pip python3-venv git
-   ```
-
-2. **Clone the Repository**
+1. **Install with Virtual Environment**
    ```bash
    git clone https://github.com/yourusername/reddit_meme_scraper.git
    cd reddit_meme_scraper
+   chmod +x install.sh
+   ./install.sh
    ```
 
-3. **Create Virtual Environment**
-   ```bash
-   python3 -m venv venv
-   source venv/bin/activate
-   ```
+---
 
-4. **Install Dependencies**
-   ```bash
-   pip install -r requirements.txt
-   ```
+## Migrating Existing Installation
 
-5. **Configure Environment**
-   - Create a `.env` file in the project root
-   - Add your credentials (same as Windows section)
+**If you have an existing venv-based installation on Raspberry Pi:**
+
+```bash
+cd reddit_meme_scraper
+chmod +x migrate_to_system.sh
+./migrate_to_system.sh
+```
+
+This will migrate your installation to system-wide for better performance and reliability.
 
 ## Configuration
 
