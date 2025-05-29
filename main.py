@@ -56,7 +56,7 @@ def main():
                     try:
                         telegram_sender.send_memes([meme])
                         sent_count += 1
-                        monitor.update_stats('sent', count=1)
+                        monitor.update_stats('sent', count=1, meme=meme)
                     except Exception as e:
                         failed_count += 1
                         monitor.update_stats('failed', count=1, error=e)
