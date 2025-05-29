@@ -2,7 +2,7 @@
     "reddit": {
         "subreddits": ["dankmemes", "memes", "funny", "wholesomememes", "blursedimages", "couplememes", "aww", "cats"],
         "sort_by": "hot",
-        "limit": 10,
+        "limit": 20,
         "min_score": 100
     },
     "schedule": {
@@ -25,7 +25,7 @@
         }
     },
     "display": {
-        "enabled": false,
+        "enabled": true,
         "type": "epd2in13_V3"
     }
 } 

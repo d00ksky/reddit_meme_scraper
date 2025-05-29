@@ -1,0 +1,290 @@
+2025-05-29 12:37:37,249 - utils - INFO - Starting Reddit Meme Scraper
+2025-05-29 12:37:39,103 - reddit_scraper - INFO - Reddit scraper initialized
+2025-05-29 12:37:58,478 - utils - INFO - Starting Reddit Meme Scraper
+2025-05-29 12:37:58,500 - reddit_scraper - INFO - Reddit scraper initialized
+2025-05-29 12:38:18,096 - utils - INFO - Starting Reddit Meme Scraper
+2025-05-29 12:38:18,118 - reddit_scraper - INFO - Reddit scraper initialized
+2025-05-29 12:38:37,821 - utils - INFO - Starting Reddit Meme Scraper
+2025-05-29 12:38:37,843 - reddit_scraper - INFO - Reddit scraper initialized
+2025-05-29 12:38:57,622 - utils - INFO - Starting Reddit Meme Scraper
+2025-05-29 12:38:57,646 - reddit_scraper - INFO - Reddit scraper initialized
+2025-05-29 12:41:28,896 - utils - INFO - Starting Reddit Meme Scraper
+2025-05-29 12:41:28,918 - reddit_scraper - INFO - Reddit scraper initialized
+2025-05-29 12:41:28,921 - telegram_sender - INFO - Telegram sender initialized
+2025-05-29 12:41:29,455 - monitoring - INFO - E-ink display libraries not available, continuing without display
+2025-05-29 12:41:29,461 - monitoring - INFO - Monitoring thread started
+2025-05-29 12:41:29,464 - utils - INFO - Scheduler set up to run every 1 hour(s)
+2025-05-29 12:41:29,467 - utils - INFO - Starting meme scraping session
+2025-05-29 12:41:29,469 - reddit_scraper - INFO - Scraping r/dankmemes
+2025-05-29 12:41:32,900 - reddit_scraper - INFO - Scraping r/memes
+2025-05-29 12:41:33,334 - reddit_scraper - INFO - Scraping r/funny
+2025-05-29 12:41:34,132 - reddit_scraper - INFO - Scraping r/wholesomememes
+2025-05-29 12:41:36,225 - reddit_scraper - INFO - Scraping r/blursedimages
+2025-05-29 12:41:36,678 - reddit_scraper - INFO - Scraping r/couplememes
+2025-05-29 12:41:37,075 - reddit_scraper - INFO - Scraping r/aww
+2025-05-29 12:41:41,454 - reddit_scraper - INFO - Scraping r/cats
+2025-05-29 12:52:32,137 - utils - INFO - Starting Reddit Meme Scraper
+2025-05-29 12:52:32,163 - reddit_scraper - INFO - Reddit scraper initialized
+2025-05-29 12:52:32,165 - telegram_sender - INFO - Telegram sender initialized
+2025-05-29 12:52:32,620 - monitoring - INFO - E-ink display libraries not available, continuing without display
+2025-05-29 12:52:32,626 - monitoring - INFO - Monitoring thread started
+2025-05-29 12:52:32,629 - utils - INFO - Scheduler set up to run every 1 hour(s)
+2025-05-29 12:52:32,632 - utils - INFO - Starting meme scraping session
+2025-05-29 12:52:32,635 - reddit_scraper - INFO - Scraping r/dankmemes
+2025-05-29 12:52:36,047 - reddit_scraper - INFO - Scraping r/memes
+2025-05-29 12:52:36,487 - reddit_scraper - INFO - Scraping r/funny
+2025-05-29 12:52:37,266 - reddit_scraper - INFO - Scraping r/wholesomememes
+2025-05-29 12:52:39,312 - reddit_scraper - INFO - Scraping r/blursedimages
+2025-05-29 12:52:39,733 - reddit_scraper - INFO - Scraping r/couplememes
+2025-05-29 12:52:40,191 - reddit_scraper - INFO - Scraping r/aww
+2025-05-29 12:52:43,644 - reddit_scraper - INFO - Scraping r/cats
+2025-05-29 13:00:16,565 - utils - INFO - Starting Reddit Meme Scraper
+2025-05-29 13:00:18,566 - reddit_scraper - INFO - Reddit scraper initialized
+2025-05-29 13:00:18,570 - telegram_sender - INFO - Telegram sender initialized
+2025-05-29 13:00:19,188 - monitoring - INFO - E-ink display libraries not available, continuing without display
+2025-05-29 13:00:19,194 - monitoring - INFO - Monitoring thread started
+2025-05-29 13:00:19,196 - utils - INFO - Scheduler set up to run every 1 hour(s)
+2025-05-29 13:00:19,198 - utils - INFO - Starting meme scraping session
+2025-05-29 13:00:19,200 - reddit_scraper - INFO - Scraping r/dankmemes
+2025-05-29 13:00:22,809 - reddit_scraper - INFO - Scraping r/memes
+2025-05-29 13:00:23,222 - reddit_scraper - INFO - Scraping r/funny
+2025-05-29 13:00:24,061 - reddit_scraper - INFO - Scraping r/wholesomememes
+2025-05-29 13:00:26,108 - reddit_scraper - INFO - Scraping r/blursedimages
+2025-05-29 13:00:45,883 - reddit_scraper - INFO - Scraping r/couplememes
+2025-05-29 13:00:46,327 - reddit_scraper - INFO - Scraping r/aww
+2025-05-29 13:00:50,655 - reddit_scraper - INFO - Scraping r/cats
+2025-05-29 13:01:00,827 - reddit_scraper - INFO - Found 49 new memes
+2025-05-29 13:01:00,834 - utils - INFO - Found 49 new memes
+2025-05-29 13:01:03,898 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8088215203:AAEEjClxQLf3g7h0NngiVUZ4TN9esgIzroY/sendPhoto "HTTP/1.1 200 OK"
+2025-05-29 13:01:03,919 - telegram_sender - INFO - Sent meme: This took me a while...
+2025-05-29 13:01:08,026 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8088215203:AAEEjClxQLf3g7h0NngiVUZ4TN9esgIzroY/sendPhoto "HTTP/1.1 200 OK"
+2025-05-29 13:01:08,046 - telegram_sender - INFO - Sent meme: 9 Years Since the Gorilla Timeline Split...
+2025-05-29 13:01:12,159 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8088215203:AAEEjClxQLf3g7h0NngiVUZ4TN9esgIzroY/sendPhoto "HTTP/1.1 200 OK"
+2025-05-29 13:01:12,180 - telegram_sender - INFO - Sent meme: Almost as intimate as the guy zipping my fly...
+2025-05-29 13:01:16,227 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8088215203:AAEEjClxQLf3g7h0NngiVUZ4TN9esgIzroY/sendPhoto "HTTP/1.1 200 OK"
+2025-05-29 13:01:16,248 - telegram_sender - INFO - Sent meme: Enough is enough...
+2025-05-29 13:01:20,436 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8088215203:AAEEjClxQLf3g7h0NngiVUZ4TN9esgIzroY/sendPhoto "HTTP/1.1 200 OK"
+2025-05-29 13:01:20,455 - telegram_sender - INFO - Sent meme: Legit...
+2025-05-29 13:01:24,480 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8088215203:AAEEjClxQLf3g7h0NngiVUZ4TN9esgIzroY/sendPhoto "HTTP/1.1 400 Bad Request"
+2025-05-29 13:01:24,493 - telegram_sender - ERROR - Failed to send meme 1ky398x: Can't parse entities: can't find end of the entity starting at byte offset 147
+2025-05-29 13:01:27,466 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8088215203:AAEEjClxQLf3g7h0NngiVUZ4TN9esgIzroY/sendPhoto "HTTP/1.1 200 OK"
+2025-05-29 13:01:27,485 - telegram_sender - INFO - Sent meme: context in comments...
+2025-05-29 13:01:31,519 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8088215203:AAEEjClxQLf3g7h0NngiVUZ4TN9esgIzroY/sendPhoto "HTTP/1.1 200 OK"
+2025-05-29 13:01:31,538 - telegram_sender - INFO - Sent meme: Nine years later and it all makes sense...
+2025-05-29 13:01:35,575 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8088215203:AAEEjClxQLf3g7h0NngiVUZ4TN9esgIzroY/sendPhoto "HTTP/1.1 200 OK"
+2025-05-29 13:01:35,594 - telegram_sender - INFO - Sent meme: Goblins Started Sweating Bullets...
+2025-05-29 13:01:39,606 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8088215203:AAEEjClxQLf3g7h0NngiVUZ4TN9esgIzroY/sendPhoto "HTTP/1.1 200 OK"
+2025-05-29 13:01:39,625 - telegram_sender - INFO - Sent meme: Today is Bank Holiday in Germany....
+2025-05-29 13:01:43,869 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8088215203:AAEEjClxQLf3g7h0NngiVUZ4TN9esgIzroY/sendPhoto "HTTP/1.1 200 OK"
+2025-05-29 13:01:43,887 - telegram_sender - INFO - Sent meme: Absolutely...
+2025-05-29 13:01:47,940 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8088215203:AAEEjClxQLf3g7h0NngiVUZ4TN9esgIzroY/sendPhoto "HTTP/1.1 200 OK"
+2025-05-29 13:01:47,959 - telegram_sender - INFO - Sent meme: Adulthood hits hard😪...
+2025-05-29 13:01:51,996 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8088215203:AAEEjClxQLf3g7h0NngiVUZ4TN9esgIzroY/sendPhoto "HTTP/1.1 200 OK"
+2025-05-29 13:01:52,014 - telegram_sender - INFO - Sent meme: That was unpleasant...
+2025-05-29 13:01:56,071 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8088215203:AAEEjClxQLf3g7h0NngiVUZ4TN9esgIzroY/sendPhoto "HTTP/1.1 200 OK"
+2025-05-29 13:01:56,090 - telegram_sender - INFO - Sent meme: you are a monster!...
+2025-05-29 13:02:00,490 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8088215203:AAEEjClxQLf3g7h0NngiVUZ4TN9esgIzroY/sendPhoto "HTTP/1.1 200 OK"
+2025-05-29 13:02:00,510 - telegram_sender - INFO - Sent meme: Decimal...???...
+2025-05-29 13:02:04,962 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8088215203:AAEEjClxQLf3g7h0NngiVUZ4TN9esgIzroY/sendPhoto "HTTP/1.1 200 OK"
+2025-05-29 13:02:04,991 - telegram_sender - INFO - Sent meme: Name the movie......
+2025-05-29 13:02:11,910 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8088215203:AAEEjClxQLf3g7h0NngiVUZ4TN9esgIzroY/sendPhoto "HTTP/1.1 200 OK"
+2025-05-29 13:02:11,948 - telegram_sender - INFO - Sent meme: What sorcery is this?...
+2025-05-29 13:02:16,011 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8088215203:AAEEjClxQLf3g7h0NngiVUZ4TN9esgIzroY/sendPhoto "HTTP/1.1 200 OK"
+2025-05-29 13:02:16,029 - telegram_sender - INFO - Sent meme: True or not for you?...
+2025-05-29 13:02:20,086 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8088215203:AAEEjClxQLf3g7h0NngiVUZ4TN9esgIzroY/sendPhoto "HTTP/1.1 200 OK"
+2025-05-29 13:02:20,104 - telegram_sender - INFO - Sent meme: The creativity the internet has with females is in...
+2025-05-29 13:02:24,138 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8088215203:AAEEjClxQLf3g7h0NngiVUZ4TN9esgIzroY/sendPhoto "HTTP/1.1 200 OK"
+2025-05-29 13:02:24,157 - telegram_sender - INFO - Sent meme: The Berenstain Bears Are Being Hunted By The Preda...
+2025-05-29 13:33:47,199 - utils - INFO - Starting Reddit Meme Scraper
+2025-05-29 13:33:47,228 - reddit_scraper - INFO - Reddit scraper initialized
+2025-05-29 13:33:47,231 - telegram_sender - INFO - Telegram sender initialized
+2025-05-29 13:33:47,870 - monitoring - INFO - E-ink display libraries not available, continuing without display
+2025-05-29 13:33:47,875 - monitoring - INFO - Monitoring thread started
+2025-05-29 13:33:47,879 - utils - INFO - Scheduler set up to run every 1 hour(s)
+2025-05-29 13:33:47,881 - utils - INFO - Starting meme scraping session
+2025-05-29 13:33:47,884 - reddit_scraper - INFO - Scraping r/dankmemes
+2025-05-29 13:33:51,558 - reddit_scraper - INFO - Scraping r/memes
+2025-05-29 13:33:51,940 - reddit_scraper - INFO - Scraping r/funny
+2025-05-29 13:33:52,731 - reddit_scraper - INFO - Scraping r/wholesomememes
+2025-05-29 13:33:54,689 - reddit_scraper - INFO - Scraping r/blursedimages
+2025-05-29 13:33:55,137 - reddit_scraper - INFO - Scraping r/couplememes
+2025-05-29 13:33:55,567 - reddit_scraper - INFO - Scraping r/aww
+2025-05-29 13:33:59,247 - reddit_scraper - INFO - Scraping r/cats
+2025-05-29 13:34:09,633 - reddit_scraper - INFO - Found 5 new memes
+2025-05-29 13:34:09,636 - utils - INFO - Found 5 new memes
+2025-05-29 13:34:12,634 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8088215203:AAEEjClxQLf3g7h0NngiVUZ4TN9esgIzroY/sendPhoto "HTTP/1.1 200 OK"
+2025-05-29 13:34:12,654 - telegram_sender - INFO - Sent meme: Too many reasons...
+2025-05-29 13:34:16,632 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8088215203:AAEEjClxQLf3g7h0NngiVUZ4TN9esgIzroY/sendPhoto "HTTP/1.1 200 OK"
+2025-05-29 13:34:16,654 - telegram_sender - INFO - Sent meme: I was sleepy that day...
+2025-05-29 13:48:29,941 - utils - INFO - Starting Reddit Meme Scraper
+2025-05-29 13:48:29,970 - reddit_scraper - INFO - Reddit scraper initialized
+2025-05-29 13:48:29,973 - telegram_sender - INFO - Telegram sender initialized
+2025-05-29 13:48:30,499 - monitoring - WARNING - Failed to initialize display: Cannot find sysfs_software_spi.so
+2025-05-29 13:48:30,508 - monitoring - INFO - Monitoring thread started
+2025-05-29 13:48:30,511 - utils - INFO - Scheduler set up to run every 1 hour(s)
+2025-05-29 13:48:30,514 - utils - INFO - Starting meme scraping session
+2025-05-29 13:48:30,517 - reddit_scraper - INFO - Scraping r/dankmemes
+2025-05-29 13:48:33,995 - reddit_scraper - INFO - Scraping r/memes
+2025-05-29 13:48:34,419 - reddit_scraper - INFO - Scraping r/funny
+2025-05-29 13:48:35,210 - reddit_scraper - INFO - Scraping r/wholesomememes
+2025-05-29 13:48:37,156 - reddit_scraper - INFO - Scraping r/blursedimages
+2025-05-29 13:48:37,589 - reddit_scraper - INFO - Scraping r/couplememes
+2025-05-29 13:48:38,035 - reddit_scraper - INFO - Scraping r/aww
+2025-05-29 13:48:41,902 - reddit_scraper - INFO - Scraping r/cats
+2025-05-29 13:48:52,311 - reddit_scraper - INFO - Found 1 new memes
+2025-05-29 13:48:52,314 - utils - INFO - Found 1 new memes
+2025-05-29 13:52:02,112 - utils - INFO - Starting Reddit Meme Scraper
+2025-05-29 13:52:02,149 - reddit_scraper - INFO - Reddit scraper initialized
+2025-05-29 13:52:02,152 - telegram_sender - INFO - Telegram sender initialized
+2025-05-29 13:52:02,697 - monitoring - WARNING - Failed to initialize display: Cannot find sysfs_software_spi.so
+2025-05-29 13:52:02,703 - monitoring - INFO - Monitoring thread started
+2025-05-29 13:52:02,706 - utils - INFO - Scheduler set up to run every 1 hour(s)
+2025-05-29 13:52:02,709 - utils - INFO - Starting meme scraping session
+2025-05-29 13:52:02,712 - reddit_scraper - INFO - Scraping r/dankmemes
+2025-05-29 13:52:06,244 - reddit_scraper - INFO - Scraping r/memes
+2025-05-29 13:52:06,632 - reddit_scraper - INFO - Scraping r/funny
+2025-05-29 13:52:07,445 - reddit_scraper - INFO - Scraping r/wholesomememes
+2025-05-29 13:52:09,542 - reddit_scraper - INFO - Scraping r/blursedimages
+2025-05-29 13:52:10,008 - reddit_scraper - INFO - Scraping r/couplememes
+2025-05-29 13:52:10,461 - reddit_scraper - INFO - Scraping r/aww
+2025-05-29 13:52:14,284 - reddit_scraper - INFO - Scraping r/cats
+2025-05-29 13:53:29,734 - utils - INFO - Starting Reddit Meme Scraper
+2025-05-29 13:53:32,255 - reddit_scraper - INFO - Reddit scraper initialized
+2025-05-29 13:53:32,259 - telegram_sender - INFO - Telegram sender initialized
+2025-05-29 13:53:32,979 - monitoring - WARNING - Failed to initialize display: Cannot find sysfs_software_spi.so
+2025-05-29 13:53:32,985 - monitoring - INFO - Monitoring thread started
+2025-05-29 13:53:32,988 - utils - INFO - Scheduler set up to run every 1 hour(s)
+2025-05-29 13:53:32,991 - utils - INFO - Starting meme scraping session
+2025-05-29 13:53:32,994 - reddit_scraper - INFO - Scraping r/dankmemes
+2025-05-29 13:53:36,592 - reddit_scraper - INFO - Scraping r/memes
+2025-05-29 13:53:37,084 - reddit_scraper - INFO - Scraping r/funny
+2025-05-29 13:53:38,015 - reddit_scraper - INFO - Scraping r/wholesomememes
+2025-05-29 13:53:40,442 - reddit_scraper - INFO - Scraping r/blursedimages
+2025-05-29 13:54:00,377 - reddit_scraper - INFO - Scraping r/couplememes
+2025-05-29 13:54:00,923 - reddit_scraper - INFO - Scraping r/aww
+2025-05-29 13:54:04,569 - reddit_scraper - INFO - Scraping r/cats
+2025-05-29 13:54:15,223 - reddit_scraper - INFO - Found 0 new memes
+2025-05-29 13:54:15,229 - utils - INFO - No new memes found
+2025-05-29 13:54:28,229 - utils - INFO - Starting Reddit Meme Scraper
+2025-05-29 13:54:28,252 - reddit_scraper - INFO - Reddit scraper initialized
+2025-05-29 13:54:28,255 - telegram_sender - INFO - Telegram sender initialized
+2025-05-29 13:54:28,702 - monitoring - WARNING - Failed to initialize display: Cannot find sysfs_software_spi.so
+2025-05-29 13:54:28,708 - monitoring - INFO - Monitoring thread started
+2025-05-29 13:54:28,711 - utils - INFO - Scheduler set up to run every 1 hour(s)
+2025-05-29 13:54:28,714 - utils - INFO - Starting meme scraping session
+2025-05-29 13:54:28,717 - reddit_scraper - INFO - Scraping r/dankmemes
+2025-05-29 13:54:32,252 - reddit_scraper - INFO - Scraping r/memes
+2025-05-29 13:54:32,655 - reddit_scraper - INFO - Scraping r/funny
+2025-05-29 13:54:33,456 - reddit_scraper - INFO - Scraping r/wholesomememes
+2025-05-29 13:54:36,141 - reddit_scraper - INFO - Scraping r/blursedimages
+2025-05-29 13:54:36,559 - reddit_scraper - INFO - Scraping r/couplememes
+2025-05-29 13:54:37,052 - reddit_scraper - INFO - Scraping r/aww
+2025-05-29 13:57:09,990 - utils - INFO - Starting Reddit Meme Scraper
+2025-05-29 13:57:10,130 - reddit_scraper - INFO - Reddit scraper initialized
+2025-05-29 13:57:10,138 - telegram_sender - INFO - Telegram sender initialized
+2025-05-29 13:57:27,203 - monitoring - INFO - E-ink display (epd2in13_V3) initialized
+2025-05-29 13:57:27,224 - monitoring - INFO - Monitoring thread started
+2025-05-29 13:57:27,251 - utils - INFO - Scheduler set up to run every 1 hour(s)
+2025-05-29 13:57:27,260 - utils - INFO - Starting meme scraping session
+2025-05-29 13:57:27,279 - reddit_scraper - INFO - Scraping r/dankmemes
+2025-05-29 13:57:35,293 - reddit_scraper - INFO - Scraping r/memes
+2025-05-29 13:57:35,971 - reddit_scraper - INFO - Scraping r/funny
+2025-05-29 13:57:37,167 - reddit_scraper - INFO - Scraping r/wholesomememes
+2025-05-29 13:57:40,283 - reddit_scraper - INFO - Scraping r/blursedimages
+2025-05-29 13:57:41,007 - reddit_scraper - INFO - Scraping r/couplememes
+2025-05-29 13:57:41,576 - reddit_scraper - INFO - Scraping r/aww
+2025-05-29 13:58:55,599 - reddit_scraper - INFO - Scraping r/cats
+2025-05-29 13:59:08,102 - reddit_scraper - INFO - Found 0 new memes
+2025-05-29 13:59:08,106 - utils - INFO - No new memes found
+2025-05-29 13:59:40,634 - utils - INFO - Starting Reddit Meme Scraper
+2025-05-29 13:59:40,655 - reddit_scraper - INFO - Reddit scraper initialized
+2025-05-29 13:59:40,658 - telegram_sender - INFO - Telegram sender initialized
+2025-05-29 13:59:54,083 - monitoring - INFO - E-ink display (epd2in13_V3) initialized
+2025-05-29 13:59:54,105 - monitoring - INFO - Monitoring thread started
+2025-05-29 13:59:54,128 - utils - INFO - Scheduler set up to run every 1 hour(s)
+2025-05-29 13:59:54,131 - utils - INFO - Starting meme scraping session
+2025-05-29 13:59:54,134 - reddit_scraper - INFO - Scraping r/dankmemes
+2025-05-29 14:00:00,598 - reddit_scraper - INFO - Scraping r/memes
+2025-05-29 14:00:01,078 - reddit_scraper - INFO - Scraping r/funny
+2025-05-29 14:00:02,163 - reddit_scraper - INFO - Scraping r/wholesomememes
+2025-05-29 14:00:04,987 - reddit_scraper - INFO - Scraping r/blursedimages
+2025-05-29 14:00:05,495 - reddit_scraper - INFO - Scraping r/couplememes
+2025-05-29 14:00:06,023 - reddit_scraper - INFO - Scraping r/aww
+2025-05-29 14:00:10,404 - reddit_scraper - INFO - Scraping r/cats
+2025-05-29 14:00:22,790 - reddit_scraper - INFO - Found 0 new memes
+2025-05-29 14:00:22,794 - utils - INFO - No new memes found
+2025-05-29 14:01:12,242 - utils - INFO - Starting Reddit Meme Scraper
+2025-05-29 14:01:12,263 - reddit_scraper - INFO - Reddit scraper initialized
+2025-05-29 14:01:12,266 - telegram_sender - INFO - Telegram sender initialized
+2025-05-29 14:01:25,747 - monitoring - INFO - E-ink display (epd2in13_V3) initialized
+2025-05-29 14:01:25,769 - monitoring - INFO - Monitoring thread started
+2025-05-29 14:01:25,796 - utils - INFO - Scheduler set up to run every 1 hour(s)
+2025-05-29 14:01:25,806 - utils - INFO - Starting meme scraping session
+2025-05-29 14:01:25,821 - reddit_scraper - INFO - Scraping r/dankmemes
+2025-05-29 14:01:32,740 - reddit_scraper - INFO - Scraping r/memes
+2025-05-29 14:01:33,296 - reddit_scraper - INFO - Scraping r/funny
+2025-05-29 14:01:34,219 - reddit_scraper - INFO - Scraping r/wholesomememes
+2025-05-29 14:01:36,527 - reddit_scraper - INFO - Scraping r/blursedimages
+2025-05-29 14:01:37,103 - reddit_scraper - INFO - Scraping r/couplememes
+2025-05-29 14:01:37,639 - reddit_scraper - INFO - Scraping r/aww
+2025-05-29 14:01:42,139 - reddit_scraper - INFO - Scraping r/cats
+2025-05-29 14:01:54,915 - reddit_scraper - INFO - Found 0 new memes
+2025-05-29 14:01:54,921 - utils - INFO - No new memes found
+2025-05-29 14:20:11,961 - utils - INFO - Starting Reddit Meme Scraper
+2025-05-29 14:20:11,982 - reddit_scraper - INFO - Reddit scraper initialized
+2025-05-29 14:20:11,985 - telegram_sender - INFO - Telegram sender initialized
+2025-05-29 14:20:25,411 - monitoring - INFO - E-ink display (epd2in13_V3) initialized
+2025-05-29 14:20:25,434 - monitoring - INFO - Monitoring thread started
+2025-05-29 14:20:25,458 - utils - INFO - Scheduler set up to run every 1 hour(s)
+2025-05-29 14:20:25,477 - utils - INFO - Starting meme scraping session
+2025-05-29 14:20:25,481 - reddit_scraper - INFO - Scraping r/dankmemes
+2025-05-29 14:20:32,035 - reddit_scraper - INFO - Scraping r/memes
+2025-05-29 14:20:32,525 - reddit_scraper - INFO - Scraping r/funny
+2025-05-29 14:20:33,465 - reddit_scraper - INFO - Scraping r/wholesomememes
+2025-05-29 14:20:35,829 - reddit_scraper - INFO - Scraping r/blursedimages
+2025-05-29 14:20:36,336 - reddit_scraper - INFO - Scraping r/couplememes
+2025-05-29 14:20:36,851 - reddit_scraper - INFO - Scraping r/aww
+2025-05-29 14:20:41,293 - reddit_scraper - INFO - Scraping r/cats
+2025-05-29 14:20:53,159 - reddit_scraper - INFO - Found 3 new memes
+2025-05-29 14:20:53,164 - utils - INFO - Found 3 new memes
+2025-05-29 14:20:57,026 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8088215203:AAEEjClxQLf3g7h0NngiVUZ4TN9esgIzroY/sendPhoto "HTTP/1.1 200 OK"
+2025-05-29 14:20:57,054 - telegram_sender - INFO - Sent meme: look dad I'm an artist...
+2025-05-29 14:21:08,934 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8088215203:AAEEjClxQLf3g7h0NngiVUZ4TN9esgIzroY/sendPhoto "HTTP/1.1 200 OK"
+2025-05-29 14:21:08,960 - telegram_sender - INFO - Sent meme: Chat how to fix this?...
+2025-05-29 14:21:21,140 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8088215203:AAEEjClxQLf3g7h0NngiVUZ4TN9esgIzroY/sendPhoto "HTTP/1.1 200 OK"
+2025-05-29 14:21:21,163 - telegram_sender - INFO - Sent meme: Hair raising romance...
+2025-05-29 14:21:29,269 - utils - INFO - Sent 3 memes successfully, 0 failed
+2025-05-29 15:20:36,376 - utils - INFO - Starting meme scraping session
+2025-05-29 15:20:36,381 - reddit_scraper - INFO - Scraping r/dankmemes
+2025-05-29 15:20:38,926 - reddit_scraper - INFO - Scraping r/memes
+2025-05-29 15:20:39,456 - reddit_scraper - INFO - Scraping r/funny
+2025-05-29 15:20:41,233 - reddit_scraper - INFO - Scraping r/wholesomememes
+2025-05-29 15:20:45,000 - reddit_scraper - INFO - Scraping r/blursedimages
+2025-05-29 15:20:45,654 - reddit_scraper - INFO - Scraping r/couplememes
+2025-05-29 15:20:46,189 - reddit_scraper - INFO - Scraping r/aww
+2025-05-29 15:20:50,844 - reddit_scraper - INFO - Scraping r/cats
+2025-05-29 15:20:58,594 - reddit_scraper - INFO - Found 11 new memes
+2025-05-29 15:20:58,599 - utils - INFO - Found 11 new memes
+2025-05-29 15:21:02,744 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8088215203:AAEEjClxQLf3g7h0NngiVUZ4TN9esgIzroY/sendPhoto "HTTP/1.1 400 Bad Request"
+2025-05-29 15:21:02,760 - telegram_sender - ERROR - Failed to send meme 1ky8ytu: Wrong type of the web page content
+2025-05-29 15:21:13,682 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8088215203:AAEEjClxQLf3g7h0NngiVUZ4TN9esgIzroY/sendPhoto "HTTP/1.1 200 OK"
+2025-05-29 15:21:13,706 - telegram_sender - INFO - Sent meme: hell nah man i'm out...
+2025-05-29 15:21:25,547 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8088215203:AAEEjClxQLf3g7h0NngiVUZ4TN9esgIzroY/sendPhoto "HTTP/1.1 200 OK"
+2025-05-29 15:21:25,571 - telegram_sender - INFO - Sent meme: DONT SNEEZE...
+2025-05-29 15:21:37,431 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8088215203:AAEEjClxQLf3g7h0NngiVUZ4TN9esgIzroY/sendPhoto "HTTP/1.1 200 OK"
+2025-05-29 15:21:37,455 - telegram_sender - INFO - Sent meme: look dad I'm an artist...
+2025-05-29 15:21:49,324 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8088215203:AAEEjClxQLf3g7h0NngiVUZ4TN9esgIzroY/sendPhoto "HTTP/1.1 200 OK"
+2025-05-29 15:21:49,350 - telegram_sender - INFO - Sent meme: Achievement unlocked...
+2025-05-29 15:22:02,253 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8088215203:AAEEjClxQLf3g7h0NngiVUZ4TN9esgIzroY/sendPhoto "HTTP/1.1 200 OK"
+2025-05-29 15:22:02,276 - telegram_sender - INFO - Sent meme: guys she has asked to send over $200 more...
+2025-05-29 15:22:14,161 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8088215203:AAEEjClxQLf3g7h0NngiVUZ4TN9esgIzroY/sendPhoto "HTTP/1.1 200 OK"
+2025-05-29 15:22:14,185 - telegram_sender - INFO - Sent meme: Takes it's soul purpose away...
+2025-05-29 15:22:26,011 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8088215203:AAEEjClxQLf3g7h0NngiVUZ4TN9esgIzroY/sendPhoto "HTTP/1.1 200 OK"
+2025-05-29 15:22:26,031 - telegram_sender - INFO - Sent meme: Schrodinger's box...
+2025-05-29 15:22:37,900 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8088215203:AAEEjClxQLf3g7h0NngiVUZ4TN9esgIzroY/sendPhoto "HTTP/1.1 200 OK"
+2025-05-29 15:22:37,924 - telegram_sender - INFO - Sent meme: blursed first aid...
+2025-05-29 15:22:49,700 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8088215203:AAEEjClxQLf3g7h0NngiVUZ4TN9esgIzroY/sendPhoto "HTTP/1.1 400 Bad Request"
+2025-05-29 15:22:49,713 - telegram_sender - ERROR - Failed to send meme 1kxws65: Can't parse entities: can't find end of the entity starting at byte offset 173
+2025-05-29 15:23:00,594 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8088215203:AAEEjClxQLf3g7h0NngiVUZ4TN9esgIzroY/sendPhoto "HTTP/1.1 400 Bad Request"
+2025-05-29 15:23:00,612 - telegram_sender - ERROR - Failed to send meme 1ky82gr: Wrong type of the web page content
+2025-05-29 15:23:07,697 - utils - INFO - Sent 11 memes successfully, 0 failed
