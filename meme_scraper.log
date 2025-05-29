@@ -288,3 +288,6 @@
 2025-05-29 15:23:00,594 - httpx - INFO - HTTP Request: POST https://api.telegram.org/bot8088215203:AAEEjClxQLf3g7h0NngiVUZ4TN9esgIzroY/sendPhoto "HTTP/1.1 400 Bad Request"
 2025-05-29 15:23:00,612 - telegram_sender - ERROR - Failed to send meme 1ky82gr: Wrong type of the web page content
 2025-05-29 15:23:07,697 - utils - INFO - Sent 11 memes successfully, 0 failed
+2025-05-29 16:44:04,293 - utils - INFO - Starting Reddit Meme Scraper
+2025-05-29 16:44:04,437 - reddit_scraper - INFO - Reddit scraper initialized
+2025-05-29 16:44:04,439 - telegram_sender - INFO - Telegram sender initialized
