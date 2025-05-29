@@ -5,15 +5,32 @@ from typing import Dict, Any
 
 def setup_logging() -> logging.Logger:
     """Setup logging configuration"""
+    # Determine log file location
+    if os.getenv('INVOCATION_ID'):  # Running under systemd
+        log_file = '/var/log/reddit-meme-scraper.log'
+        # Try to create the log file with proper permissions
+        try:
+            with open(log_file, 'a') as f:
+                pass
+        except PermissionError:
+            # Fall back to user's home directory
+            log_file = os.path.expanduser('~/reddit_meme_scraper.log')
+    else:
+        # Running manually, use current directory
+        log_file = 'meme_scraper.log'
+    
     logging.basicConfig(
         level=logging.INFO,
         format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
         handlers=[
-            logging.FileHandler('meme_scraper.log'),
+            logging.FileHandler(log_file),
             logging.StreamHandler()
         ]
     )
-    return logging.getLogger(__name__)
+    
+    logger = logging.getLogger(__name__)
+    logger.info(f"Logging to: {log_file}")
+    return logger
 
 def load_config() -> Dict[str, Any]:
     """Load configuration from config.json"""

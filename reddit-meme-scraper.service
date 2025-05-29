@@ -4,10 +4,11 @@ After=network.target
 
 [Service]
 Type=simple
-User=pi
-Group=pi
-WorkingDirectory=/home/pi/reddit_meme_scraper
-ExecStart=/usr/bin/python3 /home/pi/reddit_meme_scraper/main.py
+User=d00ksky
+Group=d00ksky
+WorkingDirectory=/home/d00ksky/reddit_meme_scraper
+ExecStartPre=/bin/sh -c 'touch /home/d00ksky/reddit_meme_scraper.log || touch /home/d00ksky/reddit_meme_scraper/meme_scraper.log'
+ExecStart=/usr/bin/python3 /home/d00ksky/reddit_meme_scraper/main.py
 Restart=always
 RestartSec=10
 StandardOutput=journal
