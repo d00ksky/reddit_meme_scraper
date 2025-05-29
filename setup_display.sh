@@ -13,11 +13,24 @@ fi
 # Install system dependencies
 echo "Installing system dependencies..."
 sudo apt-get update
-sudo apt-get install -y python3-pip python3-pil python3-numpy git
+sudo apt-get install -y python3-pip python3-pil python3-numpy git python3-dev
 
 # Enable SPI interface
 echo "Enabling SPI interface..."
 sudo raspi-config nonint do_spi 0
+
+# Check if we're in a virtual environment
+if [[ -n "$VIRTUAL_ENV" ]]; then
+    echo "Installing in virtual environment: $VIRTUAL_ENV"
+    PYTHON_CMD="python"
+    PIP_CMD="pip"
+    LIB_PATH="$VIRTUAL_ENV/lib/python3.11/site-packages"
+else
+    echo "No virtual environment detected, using system Python"
+    PYTHON_CMD="python3"
+    PIP_CMD="pip3"
+    LIB_PATH="/usr/local/lib/python3.11/dist-packages"
+fi
 
 # Download and install Waveshare e-Paper library
 echo "Installing Waveshare e-ink display library..."
@@ -28,13 +41,17 @@ unzip -q master.zip
 cd e-Paper-master/RaspberryPi_JetsonNano/python
 
 # Manual installation to avoid dependency issues
-echo "Installing waveshare_epd manually..."
-sudo mkdir -p /usr/local/lib/python3.11/dist-packages/waveshare_epd
-sudo cp -r lib/waveshare_epd/* /usr/local/lib/python3.11/dist-packages/waveshare_epd/
+echo "Installing waveshare_epd manually to: $LIB_PATH"
+mkdir -p "$LIB_PATH/waveshare_epd"
+cp -r lib/waveshare_epd/* "$LIB_PATH/waveshare_epd/"
 
-# Install required dependencies manually
+# Install required dependencies
 echo "Installing Python dependencies..."
-pip3 install --user RPi.GPIO spidev pillow numpy
+if [[ -n "$VIRTUAL_ENV" ]]; then
+    $PIP_CMD install RPi.GPIO spidev pillow numpy
+else
+    $PIP_CMD install --user RPi.GPIO spidev pillow numpy --break-system-packages
+fi
 
 echo "Display setup complete!"
 echo "To enable display, set 'display.enabled': true in config.json"
