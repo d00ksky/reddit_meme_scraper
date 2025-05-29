@@ -26,6 +26,10 @@
     },
     "display": {
         "enabled": true,
-        "type": "epd2in13_V4"
+        "type": "epd2in13_V4",
+        "show_meme_images": true,
+        "refresh_interval_minutes": 2,
+        "mode_change_minutes": 5,
+        "enable_partial_refresh": true
     }
 } 

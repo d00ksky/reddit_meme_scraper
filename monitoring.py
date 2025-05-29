@@ -53,13 +53,13 @@ class MonitoringManager:
             
             if display_type == 'epd2in13_V3':
                 from waveshare_epd import epd2in13_V3
-                self.display = FunEInkDisplay(epd2in13_V3.EPD(), 'epd2in13_V3')
+                self.display = FunEInkDisplay(epd2in13_V3.EPD(), 'epd2in13_V3', self.config)
             elif display_type == 'epd2in13_V4':
                 from waveshare_epd import epd2in13_V4
-                self.display = FunEInkDisplay(epd2in13_V4.EPD(), 'epd2in13_V4')
+                self.display = FunEInkDisplay(epd2in13_V4.EPD(), 'epd2in13_V4', self.config)
             elif display_type == 'epd2in7':
                 from waveshare_epd import epd2in7
-                self.display = FunEInkDisplay(epd2in7.EPD(), 'epd2in7')
+                self.display = FunEInkDisplay(epd2in7.EPD(), 'epd2in7', self.config)
             
             if self.display:
                 self.display.init()
@@ -75,7 +75,7 @@ class MonitoringManager:
         def monitor_loop():
             while True:
                 try:
-                    # Update display every 30 seconds for more dynamic content
+                    # Update display every 2 minutes instead of 30 seconds for stability
                     if self.display:
                         self._update_display()
                     
@@ -83,14 +83,14 @@ class MonitoringManager:
                     if self._should_send_daily_report():
                         self.send_daily_report()
                     
-                    time.sleep(30)  # More frequent updates
+                    time.sleep(120)  # 2 minutes - much more stable for e-ink
                 except Exception as e:
                     self.logger.error(f"Monitoring thread error: {e}")
-                    time.sleep(60)
+                    time.sleep(300)  # 5 minutes on error
         
         thread = threading.Thread(target=monitor_loop, daemon=True)
         thread.start()
-        self.logger.info("Monitoring thread started")
+        self.logger.info("Monitoring thread started (2-minute intervals for display stability)")
     
     def update_stats(self, event_type: str, **kwargs):
         """Update monitoring statistics"""
@@ -109,6 +109,7 @@ class MonitoringManager:
                     'title': meme.get('title', '')[:30],
                     'subreddit': meme.get('subreddit', ''),
                     'score': meme.get('score', 0),
+                    'url': meme.get('url', ''),  # Add URL for display
                     'sent_at': datetime.now()
                 })
                 # Keep only last 5 memes
@@ -209,12 +210,28 @@ class MonitoringManager:
 
 
 class FunEInkDisplay:
-    def __init__(self, epd_driver, display_type):
+    def __init__(self, epd_driver, display_type, config=None):
         self.epd = epd_driver
         self.display_type = display_type
+        self.config = config or {}
         self.width = epd_driver.height  # Note: rotated
         self.height = epd_driver.width
         self.animation_frame = 0
+        self.current_meme_index = 0
+        self.cached_memes = []  # Cache for downloaded meme images
+        self.last_refresh_time = 0
+        self.full_refresh_counter = 0
+        self.previous_image = None  # Store previous image to compare
+        
+        # Check if meme images should be displayed
+        self.show_meme_images = self.config.get('display', {}).get('show_meme_images', True)
+        
+        # Display stability settings from config
+        display_config = self.config.get('display', {})
+        self.min_refresh_interval = display_config.get('refresh_interval_minutes', 2) * 60  # Convert to seconds
+        self.mode_change_interval = display_config.get('mode_change_minutes', 5) * 60  # Convert to seconds
+        self.full_refresh_every = 6  # Full refresh every 6 updates (reduces ghosting)
+        self.enable_partial_refresh = display_config.get('enable_partial_refresh', True)
         
         # Import PIL here since it's only needed if display is available
         from PIL import Image, ImageDraw, ImageFont
@@ -243,10 +260,21 @@ class FunEInkDisplay:
     def init(self):
         """Initialize the display"""
         self.epd.init()
+        
+        # Clear display once at startup
         self.epd.Clear(0xFF)
         
-        # Show fun startup message
+        # Show startup message (only once)
         self._show_startup_animation()
+        
+        # Initialize partial refresh if supported
+        try:
+            if hasattr(self.epd, 'init_partial'):
+                self.epd.init_partial()
+                print("Partial refresh mode enabled")
+        except:
+            print("Partial refresh not supported, using full refresh")
+            self.enable_partial_refresh = False
     
     def _show_startup_animation(self):
         """Show animated startup sequence"""
@@ -282,11 +310,18 @@ class FunEInkDisplay:
     
     def update_stats(self, stats):
         """Update display with fun, dynamic statistics"""
+        # Only change display mode occasionally to reduce flicker
+        import time
+        current_time = time.time()
+        
+        # Change display mode based on configuration (default: every 5 minutes)
+        if current_time - self.last_refresh_time >= self.mode_change_interval:
+            # Determine number of display modes based on configuration
+            max_modes = 5 if self.show_meme_images else 4
+            self.animation_frame = (self.animation_frame + 1) % max_modes
+        
         image = self.Image.new('1', (self.width, self.height), 255)
         draw = self.ImageDraw.Draw(image)
-        
-        # Cycle through different display modes
-        self.animation_frame = (self.animation_frame + 1) % 4
         
         if self.animation_frame == 0:
             self._draw_main_stats(draw, stats)
@@ -294,10 +329,14 @@ class FunEInkDisplay:
             self._draw_recent_memes(draw, stats)
         elif self.animation_frame == 2:
             self._draw_subreddit_stats(draw, stats)
-        else:
+        elif self.animation_frame == 3:
             self._draw_fun_status(draw, stats)
+        elif self.animation_frame == 4 and self.show_meme_images:
+            self._draw_meme_display_stable(draw, stats)
+            return  # _draw_meme_display_stable handles its own refresh
         
-        self.epd.display(self.epd.getbuffer(image))
+        # Use smart refresh instead of direct display
+        self._smart_refresh(image)
     
     def _draw_border(self, draw, style='fancy'):
         """Draw decorative borders"""
@@ -429,4 +468,169 @@ class FunEInkDisplay:
         
         # Current time
         now = datetime.now().strftime("%H:%M:%S")
-        draw.text((10, self.height - 15), now, font=self.font_tiny, fill=0) 
+        draw.text((10, self.height - 15), now, font=self.font_tiny, fill=0)
+    
+    def _draw_meme_display_stable(self, draw, stats):
+        """Display actual meme images with stable refresh"""
+        if not stats.get('recent_memes'):
+            # No memes to display
+            image = self.Image.new('1', (self.width, self.height), 255)
+            draw = self.ImageDraw.Draw(image)
+            self._draw_border(draw)
+            draw.text((10, 8), "🎭 MEME DISPLAY 🎭", font=self.font_medium, fill=0)
+            
+            face = random.choice(self.meme_faces)
+            draw.text((10, 50), f"No memes cached yet {face}", font=self.font_small, fill=0)
+            draw.text((10, 70), "Check back soon!", font=self.font_small, fill=0)
+            self._smart_refresh(image)
+            return
+        
+        # Get current meme
+        recent_memes = stats['recent_memes']
+        if self.current_meme_index >= len(recent_memes):
+            self.current_meme_index = 0
+        
+        current_meme = recent_memes[self.current_meme_index]
+        
+        # Try to download and display the meme
+        if current_meme.get('url'):
+            processed_img, meme_data = self._download_meme_image(current_meme)
+            
+            if processed_img:
+                # Clear display
+                image = self.Image.new('1', (self.width, self.height), 255)
+                draw = self.ImageDraw.Draw(image)
+                
+                # Draw border
+                draw.rectangle([0, 0, self.width-1, self.height-1], outline=0, width=1)
+                
+                # Calculate position to center the image
+                img_x = (self.width - processed_img.width) // 2
+                img_y = 25  # Leave space for title
+                
+                # Paste the meme image
+                image.paste(processed_img, (img_x, img_y))
+                
+                # Add title at top
+                title = current_meme['title'][:30] + "..." if len(current_meme['title']) > 30 else current_meme['title']
+                title_bbox = draw.textbbox((0, 0), title, font=self.font_small)
+                title_width = title_bbox[2] - title_bbox[0]
+                title_x = (self.width - title_width) // 2
+                draw.text((title_x, 5), title, font=self.font_small, fill=0)
+                
+                # Add info at bottom
+                info = f"r/{current_meme['subreddit']} • ⬆{current_meme['score']}"
+                draw.text((5, self.height - 15), info, font=self.font_tiny, fill=0)
+                
+                # Use smart refresh
+                if self._smart_refresh(image):
+                    # Move to next meme only if refresh was successful
+                    self.current_meme_index = (self.current_meme_index + 1) % len(recent_memes)
+                return
+        
+        # Fallback if image download failed
+        image = self.Image.new('1', (self.width, self.height), 255)
+        draw = self.ImageDraw.Draw(image)
+        self._draw_border(draw)
+        draw.text((10, 8), "🎭 MEME DISPLAY 🎭", font=self.font_medium, fill=0)
+        
+        title = current_meme['title'][:25] + "..." if len(current_meme['title']) > 25 else current_meme['title']
+        draw.text((10, 30), title, font=self.font_small, fill=0)
+        draw.text((10, 50), f"r/{current_meme['subreddit']}", font=self.font_small, fill=0)
+        draw.text((10, 70), f"⬆ {current_meme['score']} upvotes", font=self.font_small, fill=0)
+        
+        # Add a meme face
+        face = random.choice(self.meme_faces)
+        face_bbox = draw.textbbox((0, 0), face, font=self.font_large)
+        face_width = face_bbox[2] - face_bbox[0]
+        draw.text(((self.width - face_width) // 2, 90), face, font=self.font_large, fill=0)
+        
+        draw.text((10, self.height - 15), "Image download failed :(", font=self.font_tiny, fill=0)
+        self._smart_refresh(image)
+    
+    def _download_meme_image(self, meme_data):
+        """Download and process a meme image for display"""
+        try:
+            import requests
+            from io import BytesIO
+            
+            # Download the image
+            response = requests.get(meme_data['url'], timeout=10, headers={
+                'User-Agent': 'RedditMemeScraper/1.0'
+            })
+            response.raise_for_status()
+            
+            # Open and process the image
+            img = self.Image.open(BytesIO(response.content))
+            
+            # Convert to grayscale and resize to fit display
+            img = img.convert('L')  # Grayscale
+            
+            # Calculate scaling to fit display while maintaining aspect ratio
+            img_ratio = img.width / img.height
+            display_ratio = self.width / self.height
+            
+            if img_ratio > display_ratio:
+                # Image is wider, scale by width
+                new_width = self.width - 20  # Leave margin
+                new_height = int(new_width / img_ratio)
+            else:
+                # Image is taller, scale by height
+                new_height = self.height - 60  # Leave space for title/info
+                new_width = int(new_height * img_ratio)
+            
+            img = img.resize((new_width, new_height), self.Image.Resampling.LANCZOS)
+            
+            # Convert to 1-bit for e-ink display
+            img = img.point(lambda x: 0 if x < 128 else 255, '1')
+            
+            return img, meme_data
+            
+        except Exception as e:
+            print(f"Failed to download meme image: {e}")
+            return None, None
+    
+    def _smart_refresh(self, image):
+        """Smart refresh that uses partial refresh when possible and rate limits updates"""
+        import time
+        
+        current_time = time.time()
+        
+        # Rate limiting: don't update too frequently
+        if current_time - self.last_refresh_time < self.min_refresh_interval:
+            return False
+        
+        # Check if image actually changed (avoid unnecessary refreshes)
+        if self.previous_image:
+            # Simple comparison - convert both to bytes and compare
+            try:
+                if image.tobytes() == self.previous_image.tobytes():
+                    return False  # No change, skip refresh
+            except:
+                pass  # If comparison fails, proceed with refresh
+        
+        # Determine refresh type
+        use_partial = (self.enable_partial_refresh and 
+                      hasattr(self.epd, 'displayPartial') and
+                      self.full_refresh_counter < self.full_refresh_every)
+        
+        try:
+            if use_partial:
+                # Use partial refresh (faster, less flicker)
+                if hasattr(self.epd, 'displayPartial'):
+                    self.epd.displayPartial(self.epd.getbuffer(image))
+                else:
+                    self.epd.display(self.epd.getbuffer(image))
+                self.full_refresh_counter += 1
+            else:
+                # Use full refresh (clears ghosting)
+                self.epd.display(self.epd.getbuffer(image))
+                self.full_refresh_counter = 0
+                
+            self.last_refresh_time = current_time
+            self.previous_image = image.copy()
+            return True
+            
+        except Exception as e:
+            print(f"Display refresh failed: {e}")
+            return False 
