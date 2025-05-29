@@ -4,6 +4,8 @@ import asyncio
 from typing import List, Dict, Any
 from telegram import Bot
 from telegram.error import TelegramError
+from telegram.ext import Application
+import httpx
 
 class TelegramSender:
     def __init__(self, config: Dict[str, Any]):
@@ -17,8 +19,27 @@ class TelegramSender:
         if not self.bot_token or not self.chat_id:
             raise ValueError("TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID must be set in environment variables")
         
-        self.bot = Bot(token=self.bot_token)
+        # Create bot with custom HTTP client settings
+        self.bot = None
+        self._create_bot()
         self.logger.info("Telegram sender initialized")
+    
+    def _create_bot(self):
+        """Create a new bot instance with proper connection pool settings"""
+        # Custom HTTP client with proper connection pool settings
+        http_client = httpx.AsyncClient(
+            timeout=httpx.Timeout(30.0, connect=10.0),
+            limits=httpx.Limits(max_keepalive_connections=5, max_connections=10),
+            follow_redirects=True
+        )
+        
+        self.bot = Bot(
+            token=self.bot_token,
+            get_updates_http_version='1.1',
+            http_version='1.1'
+        )
+        # Set the custom HTTP client
+        self.bot._httpx_client = http_client
     
     def send_memes(self, memes: List[Dict[str, Any]]):
         """Send memes via Telegram"""
@@ -30,18 +51,44 @@ class TelegramSender:
             self.logger.info("No memes to send")
             return
         
+        # Refresh bot connection to prevent pool timeouts
+        self._refresh_connection()
+        
         # Run async function in sync context
         asyncio.run(self._send_memes_async(memes))
     
+    def _refresh_connection(self):
+        """Refresh the bot connection to prevent timeouts"""
+        try:
+            if self.bot and hasattr(self.bot, '_httpx_client'):
+                # Close existing client
+                asyncio.run(self.bot._httpx_client.aclose())
+            
+            # Create new bot instance
+            self._create_bot()
+            self.logger.debug("Refreshed Telegram bot connection")
+        except Exception as e:
+            self.logger.warning(f"Error refreshing connection: {e}")
+            # Fallback to creating new bot
+            self._create_bot()
+    
     async def _send_memes_async(self, memes: List[Dict[str, Any]]):
         """Async function to send memes"""
-        for meme in memes:
-            try:
-                await self._send_single_meme(meme)
-                # Small delay between messages to avoid rate limiting
-                await asyncio.sleep(1)
-            except Exception as e:
-                self.logger.error(f"Failed to send meme {meme['id']}: {e}")
+        try:
+            for meme in memes:
+                try:
+                    await self._send_single_meme(meme)
+                    # Small delay between messages to avoid rate limiting
+                    await asyncio.sleep(1)
+                except Exception as e:
+                    self.logger.error(f"Failed to send meme {meme['id']}: {e}")
+        finally:
+            # Clean up connections after sending
+            if self.bot and hasattr(self.bot, '_httpx_client'):
+                try:
+                    await self.bot._httpx_client.aclose()
+                except Exception as e:
+                    self.logger.debug(f"Error closing HTTP client: {e}")
     
     async def _send_single_meme(self, meme: Dict[str, Any]):
         """Send a single meme"""

@@ -15,5 +15,17 @@
     },
     "telegram": {
         "enabled": true
+    },
+    "monitoring": {
+        "enabled": true,
+        "webhook": {
+            "enabled": false,
+            "url": "",
+            "type": "slack"
+        }
+    },
+    "display": {
+        "enabled": false,
+        "type": "epd2in13_V3"
     }
 } 

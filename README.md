@@ -198,109 +198,106 @@ A Python application that scrapes memes from Reddit and sends them via Telegram.
 
 ## Monitoring
 
-### Windows
-- Check the logs in the project directory
-- If running as a service, check Event Viewer
+### Webhook Notifications
 
-### Fedora/Ubuntu
-- View service status:
-  ```bash
-  sudo systemctl status reddit-meme-scraper
-  ```
-- View logs:
-  ```bash
-  journalctl -u reddit-meme-scraper -f
-  ```
+The scraper supports webhook notifications for monitoring via Slack, Discord, or generic webhooks.
+
+1. **Configure in `config.json`:**
+   ```json
+   {
+     "monitoring": {
+       "enabled": true,
+       "webhook": {
+         "enabled": true,
+         "url": "https://hooks.slack.com/services/YOUR/WEBHOOK/URL",
+         "type": "slack"
+       }
+     }
+   }
+   ```
+
+2. **Supported webhook types:**
+   - `slack` - Slack incoming webhooks
+   - `discord` - Discord webhooks
+   - `generic` - Custom webhook format
+
+3. **Notifications sent:**
+   - Startup/shutdown events
+   - Daily statistics reports
+   - Error alerts
+   - Successful meme batches
+
+### E-ink Display Support (Raspberry Pi)
+
+Perfect for your Raspberry Pi Zero W with e-ink display! The scraper can show real-time stats on supported e-ink displays.
+
+1. **Setup e-ink display (Raspberry Pi only):**
+   ```bash
+   chmod +x setup_display.sh
+   ./setup_display.sh
+   ```
+
+2. **Enable in `config.json`:**
+   ```json
+   {
+     "display": {
+       "enabled": true,
+       "type": "epd2in13_V3"
+     }
+   }
+   ```
+
+3. **Supported displays:**
+   - `epd2in13_V3` - 2.13" V3 display (most common for pwnagotchi)
+   - `epd2in7` - 2.7" display
+
+4. **Display shows:**
+   - Total memes scraped/sent/failed
+   - Last run time
+   - System uptime
+   - Current status (OK/ERROR)
+   - Real-time updates every 5 minutes
+
+**Note:** The application works perfectly without display support. Display libraries are optional and will be gracefully skipped if not available.
+
+## Advanced Configuration
+
+### Full `config.json` example:
+```json
+{
+    "reddit": {
+        "subreddits": ["memes", "dankmemes", "wholesomememes"],
+        "sort_by": "hot",
+        "limit": 10,
+        "min_score": 100
+    },
+    "schedule": {
+        "interval_hours": 1
+    },
+    "filters": {
+        "image_only": true,
+        "exclude_nsfw": false,
+        "max_title_length": 200
+    },
+    "telegram": {
+        "enabled": true
+    },
+    "monitoring": {
+        "enabled": true,
+        "webhook": {
+            "enabled": true,
+            "url": "https://hooks.slack.com/services/YOUR/WEBHOOK/URL",
+            "type": "slack"
+        }
+    },
+    "display": {
+        "enabled": true,
+        "type": "epd2in13_V3"
+    }
+}
+```
 
 ## Raspberry Pi Service Management
 
 ### Basic Service Commands
-```bash
-# Start the service
-sudo systemctl start reddit-meme-scraper
-
-# Stop the service
-sudo systemctl stop reddit-meme-scraper
-
-# Restart the service
-sudo systemctl restart reddit-meme-scraper
-
-# Check service status
-sudo systemctl status reddit-meme-scraper
-
-# Enable service to start on boot
-sudo systemctl enable reddit-meme-scraper
-
-# Disable service from starting on boot
-sudo systemctl disable reddit-meme-scraper
 ```
-
-### Logging Commands:
-```bash
-# View live logs (follow mode)
-journalctl -u reddit-meme-scraper -f
-
-# View last 100 lines of logs
-journalctl -u reddit-meme-scraper -n 100
-
-# View logs since last boot
-journalctl -u reddit-meme-scraper -b
-
-# View logs from a specific time
-journalctl -u reddit-meme-scraper --since "2024-05-28 20:00:00"
-
-# View error logs only
-journalctl -u reddit-meme-scraper -p err
-```
-
-### Service Configuration
-```bash
-# Edit service configuration
-sudo nano /etc/systemd/system/reddit-meme-scraper.service
-
-# Reload systemd after configuration changes
-sudo systemctl daemon-reload
-
-# Verify service configuration
-sudo systemctl cat reddit-meme-scraper
-```
-
-### Troubleshooting Commands
-```bash
-# Check if service is enabled
-sudo systemctl is-enabled reddit-meme-scraper
-
-# Check service dependencies
-sudo systemctl list-dependencies reddit-meme-scraper
-
-# Check service resource usage
-sudo systemctl status reddit-meme-scraper -l
-
-# View detailed service information
-sudo systemctl show reddit-meme-scraper
-```
-
-## Troubleshooting
-
-1. **Application Not Starting**
-   - Check if Python is installed correctly
-   - Verify all dependencies are installed
-   - Check the `.env` file for correct credentials
-
-2. **No Memes Being Sent**
-   - Verify Reddit API credentials
-   - Check Telegram bot token and chat ID
-   - Ensure the bot is added to the target chat/channel
-
-3. **Service Not Starting**
-   - Check service status and logs
-   - Verify file paths in service configuration
-   - Ensure correct permissions
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
