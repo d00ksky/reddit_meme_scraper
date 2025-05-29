@@ -38,13 +38,13 @@ class TelegramSender:
         bot = Bot(token=self.bot_token)
         
         try:
-        for meme in memes:
-            try:
+            for meme in memes:
+                try:
                     await self._send_single_meme(bot, meme)
-                # Small delay between messages to avoid rate limiting
-                await asyncio.sleep(1)
-            except Exception as e:
-                self.logger.error(f"Failed to send meme {meme['id']}: {e}")
+                    # Small delay between messages to avoid rate limiting
+                    await asyncio.sleep(1)
+                except Exception as e:
+                    self.logger.error(f"Failed to send meme {meme['id']}: {e}")
         finally:
             # Clean up the bot instance
             try:
