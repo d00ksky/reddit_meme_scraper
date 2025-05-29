@@ -300,4 +300,108 @@ Perfect for your Raspberry Pi Zero W with e-ink display! The scraper can show re
 ## Raspberry Pi Service Management
 
 ### Basic Service Commands
+```bash
+# Start the service
+sudo systemctl start reddit-meme-scraper
+
+# Stop the service
+sudo systemctl stop reddit-meme-scraper
+
+# Restart the service
+sudo systemctl restart reddit-meme-scraper
+
+# Check service status
+sudo systemctl status reddit-meme-scraper
+
+# Enable service to start on boot
+sudo systemctl enable reddit-meme-scraper
+
+# Disable service from starting on boot
+sudo systemctl disable reddit-meme-scraper
 ```
+
+### Logging Commands:
+```bash
+# View live logs (follow mode)
+journalctl -u reddit-meme-scraper -f
+
+# View last 100 lines of logs
+journalctl -u reddit-meme-scraper -n 100
+
+# View logs since last boot
+journalctl -u reddit-meme-scraper -b
+
+# View logs from a specific time
+journalctl -u reddit-meme-scraper --since "2024-05-28 20:00:00"
+
+# View error logs only
+journalctl -u reddit-meme-scraper -p err
+```
+
+### Service Configuration
+```bash
+# Edit service configuration
+sudo nano /etc/systemd/system/reddit-meme-scraper.service
+
+# Reload systemd after configuration changes
+sudo systemctl daemon-reload
+
+# Verify service configuration
+sudo systemctl cat reddit-meme-scraper
+```
+
+### Troubleshooting Commands
+```bash
+# Check if service is enabled
+sudo systemctl is-enabled reddit-meme-scraper
+
+# Check service dependencies
+sudo systemctl list-dependencies reddit-meme-scraper
+
+# Check service resource usage
+sudo systemctl status reddit-meme-scraper -l
+
+# View detailed service information
+sudo systemctl show reddit-meme-scraper
+```
+
+## Monitoring (Traditional)
+
+### Windows
+- Check the logs in the project directory
+- If running as a service, check Event Viewer
+
+### Fedora/Ubuntu
+- View service status:
+  ```bash
+  sudo systemctl status reddit-meme-scraper
+  ```
+- View logs:
+  ```bash
+  journalctl -u reddit-meme-scraper -f
+  ```
+
+## Troubleshooting
+
+1. **Application Not Starting**
+   - Check if Python is installed correctly
+   - Verify all dependencies are installed
+   - Check the `.env` file for correct credentials
+
+2. **No Memes Being Sent**
+   - Verify Reddit API credentials
+   - Check Telegram bot token and chat ID
+   - Ensure the bot is added to the target chat/channel
+
+3. **Service Not Starting**
+   - Check service status and logs
+   - Verify file paths in service configuration
+   - Ensure correct permissions
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

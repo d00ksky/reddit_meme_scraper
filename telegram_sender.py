@@ -4,8 +4,6 @@ import asyncio
 from typing import List, Dict, Any
 from telegram import Bot
 from telegram.error import TelegramError
-from telegram.ext import Application
-import httpx
 
 class TelegramSender:
     def __init__(self, config: Dict[str, Any]):
@@ -19,27 +17,7 @@ class TelegramSender:
         if not self.bot_token or not self.chat_id:
             raise ValueError("TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID must be set in environment variables")
         
-        # Create bot with custom HTTP client settings
-        self.bot = None
-        self._create_bot()
         self.logger.info("Telegram sender initialized")
-    
-    def _create_bot(self):
-        """Create a new bot instance with proper connection pool settings"""
-        # Custom HTTP client with proper connection pool settings
-        http_client = httpx.AsyncClient(
-            timeout=httpx.Timeout(30.0, connect=10.0),
-            limits=httpx.Limits(max_keepalive_connections=5, max_connections=10),
-            follow_redirects=True
-        )
-        
-        self.bot = Bot(
-            token=self.bot_token,
-            get_updates_http_version='1.1',
-            http_version='1.1'
-        )
-        # Set the custom HTTP client
-        self.bot._httpx_client = http_client
     
     def send_memes(self, memes: List[Dict[str, Any]]):
         """Send memes via Telegram"""
@@ -51,53 +29,38 @@ class TelegramSender:
             self.logger.info("No memes to send")
             return
         
-        # Refresh bot connection to prevent pool timeouts
-        self._refresh_connection()
-        
         # Run async function in sync context
         asyncio.run(self._send_memes_async(memes))
     
-    def _refresh_connection(self):
-        """Refresh the bot connection to prevent timeouts"""
-        try:
-            if self.bot and hasattr(self.bot, '_httpx_client'):
-                # Close existing client
-                asyncio.run(self.bot._httpx_client.aclose())
-            
-            # Create new bot instance
-            self._create_bot()
-            self.logger.debug("Refreshed Telegram bot connection")
-        except Exception as e:
-            self.logger.warning(f"Error refreshing connection: {e}")
-            # Fallback to creating new bot
-            self._create_bot()
-    
     async def _send_memes_async(self, memes: List[Dict[str, Any]]):
         """Async function to send memes"""
+        # Create a fresh bot instance for this batch to avoid connection pool issues
+        bot = Bot(token=self.bot_token)
+        
         try:
             for meme in memes:
                 try:
-                    await self._send_single_meme(meme)
+                    await self._send_single_meme(bot, meme)
                     # Small delay between messages to avoid rate limiting
                     await asyncio.sleep(1)
                 except Exception as e:
                     self.logger.error(f"Failed to send meme {meme['id']}: {e}")
         finally:
-            # Clean up connections after sending
-            if self.bot and hasattr(self.bot, '_httpx_client'):
-                try:
-                    await self.bot._httpx_client.aclose()
-                except Exception as e:
-                    self.logger.debug(f"Error closing HTTP client: {e}")
+            # Clean up the bot instance
+            try:
+                if hasattr(bot, '_httpx_client') and bot._httpx_client:
+                    await bot._httpx_client.aclose()
+            except Exception as e:
+                self.logger.debug(f"Error closing HTTP client: {e}")
     
-    async def _send_single_meme(self, meme: Dict[str, Any]):
+    async def _send_single_meme(self, bot: Bot, meme: Dict[str, Any]):
         """Send a single meme"""
         try:
             # Prepare caption
             caption = self._format_caption(meme)
             
             # Send photo with caption
-            await self.bot.send_photo(
+            await bot.send_photo(
                 chat_id=self.chat_id,
                 photo=meme['image_url'],
                 caption=caption,
@@ -109,16 +72,16 @@ class TelegramSender:
         except TelegramError as e:
             if "photo_invalid_dimensions" in str(e) or "failed to get HTTP URL content" in str(e):
                 # Try sending as document if photo fails
-                await self._send_as_document(meme)
+                await self._send_as_document(bot, meme)
             else:
                 raise e
     
-    async def _send_as_document(self, meme: Dict[str, Any]):
+    async def _send_as_document(self, bot: Bot, meme: Dict[str, Any]):
         """Send meme as document if photo sending fails"""
         try:
             caption = self._format_caption(meme)
             
-            await self.bot.send_document(
+            await bot.send_document(
                 chat_id=self.chat_id,
                 document=meme['image_url'],
                 caption=caption,
@@ -129,9 +92,9 @@ class TelegramSender:
             
         except TelegramError as e:
             # If document also fails, send just the text with URL
-            await self._send_text_fallback(meme)
+            await self._send_text_fallback(bot, meme)
     
-    async def _send_text_fallback(self, meme: Dict[str, Any]):
+    async def _send_text_fallback(self, bot: Bot, meme: Dict[str, Any]):
         """Fallback to sending just text with URL"""
         try:
             message = f"*{meme['title']}*\n\n"
@@ -139,7 +102,7 @@ class TelegramSender:
             message += f"[View Image]({meme['image_url']})\n"
             message += f"[Reddit Post]({meme['permalink']})"
             
-            await self.bot.send_message(
+            await bot.send_message(
                 chat_id=self.chat_id,
                 text=message,
                 parse_mode='Markdown',
