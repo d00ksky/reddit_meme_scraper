@@ -12,9 +12,9 @@ from PIL import Image, ImageDraw, ImageFont
 def detect_display_model():
     """Try to detect which display model is connected"""
     models_to_try = [
-        #('epd2in13_V3', 'Most common pwnagotchi display'),
-        #('epd2in13_V2', 'Older 2.13" version'), 
         ('epd2in13_V4', 'Newer 2.13" version'),
+        ('epd2in13_V3', 'Most common pwnagotchi display'),
+        ('epd2in13_V2', 'Older 2.13" version'), 
         ('epd2in13', 'Original 2.13" version'),
         ('epd2in7', '2.7" display')
     ]

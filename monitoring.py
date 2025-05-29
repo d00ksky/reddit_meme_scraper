@@ -54,6 +54,9 @@ class MonitoringManager:
             if display_type == 'epd2in13_V3':
                 from waveshare_epd import epd2in13_V3
                 self.display = FunEInkDisplay(epd2in13_V3.EPD(), 'epd2in13_V3')
+            elif display_type == 'epd2in13_V4':
+                from waveshare_epd import epd2in13_V4
+                self.display = FunEInkDisplay(epd2in13_V4.EPD(), 'epd2in13_V4')
             elif display_type == 'epd2in7':
                 from waveshare_epd import epd2in7
                 self.display = FunEInkDisplay(epd2in7.EPD(), 'epd2in7')
